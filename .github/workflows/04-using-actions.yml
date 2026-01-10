@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 24
           cache: "pnpm"
+          cache-dependency-path: "./react-app/pnpm-lock.yaml"
       - name: Install Dependencies
         working-directory: ./react-app
         run: pnpm install --frozen-lockfile
