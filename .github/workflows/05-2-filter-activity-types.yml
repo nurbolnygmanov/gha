@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: On pr closed
-        run: I am running on closed pr
+        run: echo "I am running on closed pr"
