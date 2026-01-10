@@ -7,9 +7,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v6
-
-      - name: Print folders
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "pnpm"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install Dependencies
         working-directory: ./react-app
-        run: echo */
+        run: pnpm install --frozen-lockfile
+      - name: List react-app contents
+        run: ls -la react-app
