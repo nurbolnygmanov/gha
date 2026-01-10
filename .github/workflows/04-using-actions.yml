@@ -19,4 +19,5 @@ jobs:
         working-directory: ./react-app
         run: pnpm install --frozen-lockfile
       - name: List react-app contents
+        working-directory: ./react-app
         run: ls -la react-app
