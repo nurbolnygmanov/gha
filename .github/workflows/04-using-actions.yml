@@ -19,6 +19,12 @@ jobs:
       - name: Install Dependencies
         working-directory: ./react-app
         run: pnpm install --frozen-lockfile
+      - name: run tests
+        working-directory: ./react-app
+        run: pnpm run test
+      - name: Build the app
+        working-directory: ./react-app
+        run: pnpm run build
       - name: List react-app contents
         working-directory: ./react-app
         run: ls -la
