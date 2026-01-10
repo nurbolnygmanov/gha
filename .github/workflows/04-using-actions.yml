@@ -11,4 +11,5 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Print folders
+        working-directory: ./react-app
         run: echo */
