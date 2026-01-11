@@ -6,6 +6,7 @@ on:
 env:
   W_VAR: "i am workflows env var"
   O_VAR: "I will be overwritten"
+  UNDEFINED_VAR: ${{vars.UNDEFINED_VAR}}
 
 jobs:
   echo:
@@ -30,3 +31,23 @@ jobs:
           O_VAR: "I was changed on step level"
         run: |
           echo "Step env var: ${{env.O_VAR}}"
+  echo2:
+    name: "I am echo two job"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print vars
+        run: |
+          echo "Repo var: ${{vars.MY_REPO_VAR}}"
+  echo-prod:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Print prod vars
+        run: |
+          echo "Repo var ${{vars.MY_REPO_VAR}}"
+          echo "Env var ${{vars.TARGET_VAR}}"
+  echo-undefined:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print undefined vars
+        run: echo ${{vars.UNDEFINED_VAR}}
