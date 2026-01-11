@@ -10,7 +10,7 @@ env:
 jobs:
   echo:
     name: "My name is echo job"
-    runs-on: ubuntu-latests
+    runs-on: ubuntu-latest
     env:
       J_VAR: "I am job env var"
       O_VAR: "I was overriden on job level"
