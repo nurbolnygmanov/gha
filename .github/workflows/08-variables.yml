@@ -40,7 +40,7 @@ jobs:
           echo "Repo var: ${{vars.MY_REPO_VAR}}"
   echo-prod:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: stage
     steps:
       - name: Print prod vars
         run: |
