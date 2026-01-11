@@ -1,0 +1,21 @@
+name: 06 - Contexts
+
+on:
+  - workflow_dispatch
+
+env:
+  MY_ENV_VAR: "my env variable"
+
+jobs:
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display information
+        run: |
+          echo "Event name: ${{github.event_name}}"
+          echo "Ref ${{github.ref}}"
+          echo "Workflow ${{github.workflow}}"
+      - name: Retrieve repo var
+        run: echo ${{vars.MY_VAR}}
+      - name: Retrieve env var
+        run: echo ${{env.MY_ENV_VAR}}
