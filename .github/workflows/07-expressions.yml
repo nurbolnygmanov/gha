@@ -1,4 +1,5 @@
 name: 07 - Using expressions
+run-name: 07 - Using Expressions | DEBUG - <${{inputs.debug == true && 'ON' || 'OFF'}}>
 
 on:
   workflow_dispatch:
