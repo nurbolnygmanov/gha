@@ -22,3 +22,15 @@ jobs:
         run: echo "I was triggered from main branch"
       - name: Greeting
         run: echo Hello world
+  success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Success step
+        run: echo "I am a success step"
+  post-success:
+    needs: success
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Post success step
+        run: echo "I am a post success step"
