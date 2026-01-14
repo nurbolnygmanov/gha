@@ -16,6 +16,7 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-latest
+    continue-on-error: false
     steps:
       - name: Running unit tests
         run: echo "Running tests..."
@@ -23,7 +24,7 @@ jobs:
         if: ${{inputs.pass-unit-tests == false}}
         run: |
           echo "Test chosen to fail"
-          exit 0
+          exit 1
 
   deploy-to-nonprod:
     runs-on: ubuntu-latest
