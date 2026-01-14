@@ -30,7 +30,6 @@ jobs:
   post-success:
     needs: success
     runs-on: ubuntu-latest
-    if: success()
     steps:
       - name: Post success step
         run: echo "I am a post success step"
