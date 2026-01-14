@@ -6,6 +6,9 @@ on:
       pass-unit-tests:
         type: boolean
         default: false
+      continue-on-error:
+        type: boolean
+        default: false
 
 jobs:
   lint-build:
@@ -16,7 +19,7 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-latest
-    continue-on-error: false
+    continue-on-error: ${{inputs.continue-on-error}}
     steps:
       - name: Running unit tests
         run: echo "Running tests..."
