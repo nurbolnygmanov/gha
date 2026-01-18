@@ -7,7 +7,7 @@ jobs:
   echo-matrix:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         greeting: [Hello, Hi, Hey]
         who: [World, GitHub, Actions]
