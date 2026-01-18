@@ -5,6 +5,7 @@ on:
 
 jobs:
   echo-matrix:
+    name: ${{matrix.greeting}} - ${{matrix.who}} - ${{matrix.image}} - ${{matrix.dir}}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
