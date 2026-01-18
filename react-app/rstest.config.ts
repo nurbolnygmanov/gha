@@ -8,6 +8,7 @@ export default defineConfig({
   setupFiles: ['./tests/rstest.setup.ts'],
   coverage: {
     enabled: true,
-    provider: 'istanbul'
+    provider: 'istanbul',
+    reporters: [['lcov', {projectRoot: '.'}]]
   }
 });
