@@ -28,7 +28,7 @@ jobs:
         run: echo "Deploying because status is ${{needs.build.outputs.build-status}}"
       - name: Step level output generator
         id: output-generator
-        run:
+        run: |
           echo "name=Hello" >> $GITHUB_OUTPUT
           echo "lastname=World" >> $GITHUB_OUTPUT
       - name: Step level output consumer
