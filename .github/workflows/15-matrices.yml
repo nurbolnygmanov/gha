@@ -11,11 +11,18 @@ jobs:
       matrix:
         greeting: [Hello, Hi, Hey]
         who: [World, GitHub, Actions]
+        include:
+          - image: pc
+          - dir: pc-fe
+          - image: cc
+          - dir: cc-fe
     steps:
       - name: Echo greeting
         run: |
           if ${{matrix.greeting == 'Hi'}}; then
             exit 1
           else 
-            echo ${{matrix.greeting}} - ${{matrix.who}}
+            echo ${{matrix.greeting}} - ${{matrix.who}} - ${{matrix.image}} - ${{matrix.dir}}
           fi
+      - name: Echo image
+        run: echo ${{matrix.image}} - ${{matrix.dir}}
