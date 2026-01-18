@@ -39,6 +39,6 @@ jobs:
     env:
       my-env-value: ${{vars.MY_ENV_VALUE || 'default value'}}
     steps:
-      - run: Deploying to prod
+      - run: echo "Deploying to prod"
 
 
