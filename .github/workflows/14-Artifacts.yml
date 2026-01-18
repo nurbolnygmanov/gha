@@ -41,6 +41,11 @@ jobs:
         with:
           name: ui-dist
           path: 'react-app/uploaded-dist'
+      - name: Download coverage
+        uses: actions/download-artifact@v6
+        with:
+          name: ui-test-coverage
+          path: 'react-app/bro-coverage'
       - name: show fs
         run: ls -R
 
