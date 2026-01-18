@@ -1,0 +1,19 @@
+name: 14 - Matrices
+
+on:
+  workflow_dispatch:
+
+jobs:
+  echo-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        greeting: [Hello, Hi, Hey]
+        who: [World, GitHub, Actions]
+    steps:
+      - name: Echo greeting
+        run: |
+          if ${{matrix.greeting == 'Hi'}}; then
+            exit 1
+          else 
+            echo ${{matrix.greeting}} - ${{matrix.who}}
