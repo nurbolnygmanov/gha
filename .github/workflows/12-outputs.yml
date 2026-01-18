@@ -19,6 +19,8 @@ jobs:
       - name: Build
         id: build
         run: echo "status=${{inputs.build-status}}" >> $GITHUB_OUTPUT
+      - name: Build job output
+        run: cat $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -32,6 +34,9 @@ jobs:
           echo "name=Hello" >> $GITHUB_OUTPUT
           echo "lastname=World" >> $GITHUB_OUTPUT
       - name: Step level output consumer
-        run:
+        run: |
           echo "Step output name is ${{steps.output-generator.outputs.name}}"
           echo "Step output lastname is ${{steps.output-generator.outputs.lastname}}"
+      - name: Step level Print output
+        run: |
+         cat $GITHUB_OUTPUT
