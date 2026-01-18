@@ -8,7 +8,7 @@ jobs:
     name: ${{matrix.greeting}} - ${{matrix.who}} - ${{matrix.image}} - ${{matrix.dir}}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         greeting: [Hello, Hi, Hey]
         who: [World, GitHub, Actions]
