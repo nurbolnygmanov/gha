@@ -1,0 +1,37 @@
+name: 14 - Artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-app
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          cache-dependency-path: 'react-app/pnpm-lock.yaml'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run test
+      - name: upload test coverage
+        uses: actions/upload-artifact@v6
+        with:
+          name: ui-test-coverage
+          path: 'react-app/coverage/clover.xml'
+      - run: pnpm run build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: ui-dist
+          path: 'react-app/dist'
+
+
+        

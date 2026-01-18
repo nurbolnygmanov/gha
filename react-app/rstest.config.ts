@@ -6,4 +6,8 @@ export default defineConfig({
   plugins: [pluginReact()],
   testEnvironment: 'happy-dom',
   setupFiles: ['./tests/rstest.setup.ts'],
+  coverage: {
+    enabled: true,
+    provider: 'istanbul'
+  }
 });
