@@ -14,9 +14,9 @@ jobs:
         who: [World, GitHub, Actions]
         include:
           - image: pc
-          - dir: pc-fe
+            dir: pc-fe
           - image: cc
-          - dir: cc-fe
+            dir: cc-fe
     steps:
       - name: Echo greeting
         run: |
