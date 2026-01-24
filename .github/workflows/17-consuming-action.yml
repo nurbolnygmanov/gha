@@ -18,6 +18,7 @@ jobs:
           work-dir: ./react-app
           pnpm-version: 10
       - name: Build project
+        working-directory: ./react-app
         run: |
           echo ${{steps.dependency-setup.outputs.install-is-success}}
           pnpm build
