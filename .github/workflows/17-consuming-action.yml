@@ -20,5 +20,10 @@ jobs:
       - name: Build project
         working-directory: ./react-app
         run: |
-          echo ${{steps.dependency-setup.outputs.install-is-success}}
+          echo ${{steps.dependency-setup.outputs.installation_success}}
           pnpm build
+  result:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{needs.build.outputs.install-is-success}}
