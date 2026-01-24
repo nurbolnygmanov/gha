@@ -1,0 +1,41 @@
+name: Setup PNPM and NodeJS
+description: "This action allows to setup node and pnpm dependencies"
+
+inputs:
+  node-version:
+    description: NodeJS version to use
+    required: true
+    default: 24.x
+  work-dir:
+    description: The working directory of the app
+    default: .
+  pnpm-version:
+    default: 10
+
+outputs:
+  installation_success:
+    value: ${{steps.success-step.outputs.installation_success}}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{inputs.pnpm-version}}
+    - name: Setup NodeJS ${{inputs.node-version}}
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{inputs.node-version}}
+        cache: "pnpm"
+        cache-dependency-path: "${{inputs.work-dir}}/pnpm-lock.yaml"
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{inputs.work-dir}}
+      run: pnpm install --frozen-lockfile
+    - name: Success
+      id: success-step
+      if: success()
+      shell: bash
+      run: |
+        echo "installation_success=true" >> $GITHUB_OUTPUT
