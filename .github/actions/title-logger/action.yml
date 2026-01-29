@@ -1,6 +1,11 @@
 name: Title Logger
 description: "This action logs the title of the pull request"
 
+inputs:
+  title:
+    description: "The title to log"
+    required: true
+
 runs:
   using: node24
   main: dist/index.js
