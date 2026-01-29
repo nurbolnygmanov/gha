@@ -1,0 +1,6 @@
+name: Title Logger
+description: "This action logs the title of the pull request"
+
+runs:
+  using: node24
+  main: dist/index.js

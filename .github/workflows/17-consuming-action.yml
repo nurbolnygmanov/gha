@@ -1,7 +1,17 @@
 name: 17 - Consuming reusable action
+run-name: Consuming action | env - ${{inputs.target-env}}
 
 on:
   workflow_dispatch:
+    inputs:
+      target-env:
+        type: choice
+        options:
+          - dev
+          - prod
+
+env:
+  working-directory: ./react-app
 
 jobs:
   build:
@@ -15,10 +25,10 @@ jobs:
         uses: ./.github/actions/pnpm-node-setup
         with:
           node-version: 24
-          work-dir: ./react-app
+          work-dir: ${{env.working-directory}}
           pnpm-version: 10
       - name: Build project
-        working-directory: ./react-app
+        working-directory: ${{env.working-directory}}
         run: |
           echo ${{steps.dependency-setup.outputs.installation_success}}
           pnpm build
