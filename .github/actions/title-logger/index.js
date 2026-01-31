@@ -34,7 +34,7 @@ async function run() {
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: pullRequest.number,
-    body: `Related to ticket ${ticketNumber}`,
+    body: `Ticket: ${ticketNumber}`,
   });
 }
 

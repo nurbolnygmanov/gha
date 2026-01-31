@@ -19379,8 +19379,66 @@ var require_fast_content_type_parse = __commonJS({
   }
 });
 
+// node_modules/@actions/core/lib/command.js
+var os = __toESM(require("os"), 1);
+
+// node_modules/@actions/core/lib/utils.js
+function toCommandValue(input) {
+  if (input === null || input === void 0) {
+    return "";
+  } else if (typeof input === "string" || input instanceof String) {
+    return input;
+  }
+  return JSON.stringify(input);
+}
+
+// node_modules/@actions/core/lib/command.js
+function issueCommand(command, properties, message) {
+  const cmd = new Command(command, properties, message);
+  process.stdout.write(cmd.toString() + os.EOL);
+}
+var CMD_STRING = "::";
+var Command = class {
+  constructor(command, properties, message) {
+    if (!command) {
+      command = "missing.command";
+    }
+    this.command = command;
+    this.properties = properties;
+    this.message = message;
+  }
+  toString() {
+    let cmdStr = CMD_STRING + this.command;
+    if (this.properties && Object.keys(this.properties).length > 0) {
+      cmdStr += " ";
+      let first = true;
+      for (const key in this.properties) {
+        if (this.properties.hasOwnProperty(key)) {
+          const val = this.properties[key];
+          if (val) {
+            if (first) {
+              first = false;
+            } else {
+              cmdStr += ",";
+            }
+            cmdStr += `${key}=${escapeProperty(val)}`;
+          }
+        }
+      }
+    }
+    cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
+    return cmdStr;
+  }
+};
+function escapeData(s) {
+  return toCommandValue(s).replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+}
+function escapeProperty(s) {
+  return toCommandValue(s).replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A").replace(/:/g, "%3A").replace(/,/g, "%2C");
+}
+
 // node_modules/@actions/core/lib/core.js
-var os2 = __toESM(require("os"), 1);
+var os3 = __toESM(require("os"), 1);
 
 // node_modules/@actions/http-client/lib/index.js
 var tunnel = __toESM(require_tunnel2(), 1);
@@ -19743,6 +19801,9 @@ var ExitCode;
   ExitCode2[ExitCode2["Success"] = 0] = "Success";
   ExitCode2[ExitCode2["Failure"] = 1] = "Failure";
 })(ExitCode || (ExitCode = {}));
+function setSecret(secret) {
+  issueCommand("add-mask", {}, secret);
+}
 function getInput(name, options) {
   const val = process.env[`INPUT_${name.replace(/ /g, "_").toUpperCase()}`] || "";
   if (options && options.required && !val) {
@@ -19754,7 +19815,7 @@ function getInput(name, options) {
   return val.trim();
 }
 function info(message) {
-  process.stdout.write(message + os2.EOL);
+  process.stdout.write(message + os3.EOL);
 }
 
 // node_modules/@actions/github/lib/context.js
@@ -23394,6 +23455,7 @@ async function run() {
   }
   info(`The ticket number is ${ticketNumber}`);
   const token = getInput("github-token");
+  setSecret(token);
   const octokit = getOctokit(token);
   const context3 = context2;
   const pullRequest = context3.payload.pull_request;
@@ -23406,7 +23468,7 @@ async function run() {
     owner: context3.repo.owner,
     repo: context3.repo.repo,
     pull_number: pullRequest.number,
-    body: `Related to ticket ${ticketNumber}`
+    body: `Ticket: ${ticketNumber}`
   });
 }
 run();
