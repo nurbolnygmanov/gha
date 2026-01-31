@@ -2,7 +2,7 @@ name: 17.2 - Custom actions (JS)
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, edited]
 
 jobs:
   echo:
