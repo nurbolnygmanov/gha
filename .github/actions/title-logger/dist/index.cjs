@@ -23464,11 +23464,30 @@ async function run() {
     return;
   }
   info(`The pull request is ${pullRequest.body}`);
+  const currentBody = pullRequest.body || "";
+  const ticketLink = `https://your-jira-url.com/browse/${ticketNumber}`;
+  let newBody;
+  const ticketHeaderRegex = /^###\s+Ticket\s*\n<!-- Place a link to requirements\/documentation of your work \(most likely Jira ticket\) -->\n?.*$/m;
+  if (ticketHeaderRegex.test(currentBody)) {
+    newBody = currentBody.replace(
+      ticketHeaderRegex,
+      `### Ticket
+<!-- Place a link to requirements/documentation of your work (most likely Jira ticket) -->
+${ticketLink}`
+    );
+  } else {
+    const ticketSection = `### Ticket
+<!-- Place a link to requirements/documentation of your work (most likely Jira ticket) -->
+${ticketLink}`;
+    newBody = currentBody ? `${ticketSection}
+
+${currentBody}` : ticketSection;
+  }
   await octokit.rest.pulls.update({
     owner: context3.repo.owner,
     repo: context3.repo.repo,
     pull_number: pullRequest.number,
-    body: `Ticket: ${ticketNumber}`
+    body: newBody
   });
 }
 run();
