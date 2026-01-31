@@ -23366,8 +23366,12 @@ var context2 = new Context();
 async function run() {
   const title = getInput("title");
   info(`The title is ${title}`);
-  const context3 = context2;
-  info(`The context is ${context3}`);
+  const ticketNumber = title.split(":")[1].trim();
+  if (!ticketNumber) {
+    info("No ticket number found in title");
+    return;
+  }
+  info(`The ticket number is ${ticketNumber}`);
 }
 run();
 /*! Bundled license information:
