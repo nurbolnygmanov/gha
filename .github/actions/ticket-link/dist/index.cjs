@@ -23470,7 +23470,7 @@ async function run() {
   const match = title.match(/[A-Za-z0-9]+-[A-Za-z0-9]+/);
   const ticketNumber = match ? match[0] : null;
   if (!ticketNumber) {
-    info("No ticket number found in title");
+    setFailed("No ticket number found in title");
     return;
   }
   info(`The ticket number is ${ticketNumber}`);

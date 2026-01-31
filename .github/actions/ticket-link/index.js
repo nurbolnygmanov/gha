@@ -10,7 +10,7 @@ async function run() {
   const ticketNumber = match ? match[0] : null;
 
   if (!ticketNumber) {
-    core.info("No ticket number found in title");
+    core.setFailed("No ticket number found in title");
     return;
   }
 
