@@ -15,6 +15,19 @@ async function run() {
   }
 
   core.info(`The ticket number is ${ticketNumber}`);
+
+  const token = core.getInput("github-token");
+  const octokit = github.getOctokit(token);
+
+  const context = github.context;
+  const pullRequest = context.payload.pull_request;
+
+  if (!pullRequest) {
+    core.info("No pull request found");
+    return;
+  }
+
+  core.info(`The pull request is ${pullRequest.body}`);
 }
 
 run();
