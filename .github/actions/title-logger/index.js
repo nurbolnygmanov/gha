@@ -5,8 +5,9 @@ async function run() {
   const title = core.getInput("title");
   core.info(`The title is ${title}`);
 
-  // take value after title (ticket number) feat: ABC-123 description
-  const ticketNumber = title.split(":")[1].trim();
+  // Extract ticket number pattern (e.g., ABC-123, 123-abc)
+  const match = title.match(/[A-Za-z0-9]+-[A-Za-z0-9]+/);
+  const ticketNumber = match ? match[0] : null;
 
   if (!ticketNumber) {
     core.info("No ticket number found in title");

@@ -23366,7 +23366,8 @@ var context2 = new Context();
 async function run() {
   const title = getInput("title");
   info(`The title is ${title}`);
-  const ticketNumber = title.split(":")[1].trim();
+  const match = title.match(/[A-Za-z0-9]+-[A-Za-z0-9]+/);
+  const ticketNumber = match ? match[0] : null;
   if (!ticketNumber) {
     info("No ticket number found in title");
     return;
