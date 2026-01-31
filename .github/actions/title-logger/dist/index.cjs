@@ -19838,6 +19838,14 @@ var __awaiter2 = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
+function getAuthString(token, options) {
+  if (!token && !options.auth) {
+    throw new Error("Parameter token or opts.auth is required");
+  } else if (token && options.auth) {
+    throw new Error("Parameters token and opts.auth may not both be specified");
+  }
+  return typeof options.auth === "string" ? options.auth : `token ${token}`;
+}
 function getProxyAgent(destinationUrl) {
   const hc = new httpClient.HttpClient();
   return hc.getAgent(destinationUrl);
@@ -23358,9 +23366,21 @@ var defaults = {
   }
 };
 var GitHub = Octokit.plugin(restEndpointMethods, paginateRest).defaults(defaults);
+function getOctokitOptions(token, options) {
+  const opts = Object.assign({}, options || {});
+  const auth2 = getAuthString(token, opts);
+  if (auth2) {
+    opts.auth = auth2;
+  }
+  return opts;
+}
 
 // node_modules/@actions/github/lib/github.js
 var context2 = new Context();
+function getOctokit(token, options, ...additionalPlugins) {
+  const GitHubWithPlugins = GitHub.plugin(...additionalPlugins);
+  return new GitHubWithPlugins(getOctokitOptions(token, options));
+}
 
 // index.js
 async function run() {
@@ -23373,6 +23393,21 @@ async function run() {
     return;
   }
   info(`The ticket number is ${ticketNumber}`);
+  const token = getInput("github-token");
+  const octokit = getOctokit(token);
+  const context3 = context2;
+  const pullRequest = context3.payload.pull_request;
+  if (!pullRequest) {
+    info("No pull request found");
+    return;
+  }
+  info(`The pull request is ${pullRequest.body}`);
+  await octokit.rest.issues.update({
+    owner: context3.repo.owner,
+    repo: context3.repo.repo,
+    issue_number: pullRequest.number,
+    body: `Related to ticket ${ticketNumber}`
+  });
 }
 run();
 /*! Bundled license information:
