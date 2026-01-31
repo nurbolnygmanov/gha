@@ -23465,7 +23465,8 @@ async function run() {
   }
   info(`The pull request is ${pullRequest.body}`);
   const currentBody = pullRequest.body || "";
-  const ticketLink = `https://your-jira-url.com/browse/${ticketNumber}`;
+  const ticketUrl = `https://your-jira-url.com/browse/${ticketNumber}`;
+  const ticketLink = `[${ticketNumber}](${ticketUrl})`;
   let newBody;
   const ticketHeaderRegex = /^###\s+Ticket\s*\n<!-- Place a link to requirements\/documentation of your work \(most likely Jira ticket\) -->\n?.*$/m;
   if (ticketHeaderRegex.test(currentBody)) {

@@ -31,7 +31,8 @@ async function run() {
   core.info(`The pull request is ${pullRequest.body}`);
 
   const currentBody = pullRequest.body || '';
-  const ticketLink = `https://your-jira-url.com/browse/${ticketNumber}`; // Adjust URL as needed
+  const ticketUrl = `https://your-jira-url.com/browse/${ticketNumber}`; // Adjust URL as needed
+  const ticketLink = `[${ticketNumber}](${ticketUrl})`;
   
   let newBody;
   
