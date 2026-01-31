@@ -5,6 +5,9 @@ inputs:
   title:
     description: "The title to log"
     required: true
+  github-token:
+    description: "The GitHub token to use"
+    required: true
 
 runs:
   using: node24

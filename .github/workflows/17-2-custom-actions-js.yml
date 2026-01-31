@@ -15,3 +15,4 @@ jobs:
         uses: ./.github/actions/title-logger
         with:
           title: ${{github.event.pull_request.title}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
