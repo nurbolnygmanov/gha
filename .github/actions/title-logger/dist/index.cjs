@@ -23402,10 +23402,10 @@ async function run() {
     return;
   }
   info(`The pull request is ${pullRequest.body}`);
-  await octokit.rest.issues.update({
+  await octokit.rest.pulls.update({
     owner: context3.repo.owner,
     repo: context3.repo.repo,
-    issue_number: pullRequest.number,
+    pull_number: pullRequest.number,
     body: `Related to ticket ${ticketNumber}`
   });
 }
