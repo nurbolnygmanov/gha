@@ -17,6 +17,7 @@ async function run() {
   core.info(`The ticket number is ${ticketNumber}`);
 
   const token = core.getInput("github-token");
+  core.setSecret(token);
   const octokit = github.getOctokit(token);
 
   const context = github.context;
