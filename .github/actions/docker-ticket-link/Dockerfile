@@ -7,7 +7,7 @@ COPY package*.json ./
 COPY tsconfig.json ./
 
 # Install all dependencies (including devDependencies for TypeScript)
-RUN npm ci
+RUN npm install
 
 # Copy source code
 COPY index.ts ./
