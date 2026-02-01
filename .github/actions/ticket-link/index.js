@@ -60,6 +60,9 @@ async function run() {
     pull_number: pullRequest.number,
     body: newBody,
   });
+
+  core.setOutput("ticket-link", ticketLink);
+  core.setOutput("ticket-number", ticketNumber);
 }
 
 run();

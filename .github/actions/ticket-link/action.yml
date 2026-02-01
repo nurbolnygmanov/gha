@@ -9,6 +9,12 @@ inputs:
     description: "The GitHub token to use"
     required: true
 
+outputs:
+  ticket-link:
+    description: "The link to the ticket"
+  ticket-number:
+    description: "The number of the ticket"
+
 runs:
   using: node24
   main: dist/index.cjs
