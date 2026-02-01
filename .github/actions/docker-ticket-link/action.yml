@@ -1,0 +1,14 @@
+name: Ticket Link (Docker)
+description: "This action adds a link to the ticket in the pull request description (Docker version)"
+
+inputs:
+  title:
+    description: "The title of the pull request"
+    required: true
+  github-token:
+    description: "The GitHub token to use"
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
