@@ -1,6 +1,6 @@
 FROM node:24-alpine
 
-WORKDIR /app
+WORKDIR /action
 
 # Copy package files
 COPY package*.json ./
@@ -19,4 +19,4 @@ RUN npm run build
 RUN npm prune --production
 
 # Run the compiled JavaScript
-ENTRYPOINT ["node", "dist/index.js"]
+ENTRYPOINT ["node", "/action/dist/index.js"]
