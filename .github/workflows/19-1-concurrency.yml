@@ -13,7 +13,7 @@ jobs:
       - name: Ping URL
         run: |
           # long running job
-          sleep 10
+          sleep 60
           echo "Pinged URL"
   ping2:
     runs-on: ubuntu-latest
@@ -21,5 +21,5 @@ jobs:
       - name: Ping URL
         run: |
           # long running job
-          sleep 10
+          sleep 60
           echo "Pinged URL"
