@@ -5,6 +5,7 @@ on:
 
 concurrency:
   group: ${{github.workflow.name}} - ${{github.ref_name}}
+  cancel-in-progress: true
 
 jobs:
   ping:
