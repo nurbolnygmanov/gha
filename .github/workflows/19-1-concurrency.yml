@@ -1,0 +1,25 @@
+name: 19.1 - Concurrency
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{github.workflow.name}} - ${{github.ref_name}}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping URL
+        run: |
+          # long running job
+          sleep 10
+          echo "Pinged URL"
+  ping2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping URL
+        run: |
+          # long running job
+          sleep 10
+          echo "Pinged URL"
